@@ -1,0 +1,127 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html{
+    height: 100%;/*truco para continuar lo del min-height en el body*/
+}
+
+body{
+    font-family: sans-serif;
+    font-size: 1.2rem;
+    min-height: 100%;/*--ESTO HACE QUE NUESTRO GRID  OCUPE EL 100% DE NUESTRA PAGINA   Y EL HTML*/
+}
+
+.grid-container >* {
+    box-shadow: -1px 1px 7px 0px rgba(0, 0 , 0, 0.75);
+    border-radius: 4px;
+    padding: 10px;
+    text-align: center;
+}
+
+
+
+/* A CADA ELEMENT DOWN ASSIGN A AREA SPECIFIC... EXAMPLE...*/
+
+.header{
+    grid-area: header;
+    background-color: #85aedd;
+}
+
+.navbar{
+    grid-area: navbar;
+    background-color: #afd6af;
+}
+
+.sidebar{
+    grid-area: sidebar;
+    background-color: #fdcfcf;
+}
+
+.main{
+    grid-area: main;
+    background-color: #f5f5f5;
+}
+
+.footer{
+    grid-area: footer;
+    background-color: #8c96a0;
+}
+
+
+.grid-container{
+    display: grid;
+    gap: 10px;
+    /*COMIENZA LA MAGIA ACA CON EL GRID-TEMPLATE-AREAS.
+    ...definimos nuestras areas de la pagina*/
+
+    /*aca PODEMOS MODIFICAR LAS ALTURAS DE LAS AREAS COMO HICIMOS ABAJO...
+    QUITAMOS LA PALBRA AREAS Y CONFIG AL LADO LOS VALORES QUE DESEAMOS PARA CADA ROW EN SPECIFIC*/
+    /*grid-template-areas: */
+    grid-template: 
+        "header" 100px
+        "navbar" 50px
+        "main"   auto
+        "sidebar"100px
+         /*ACA PODEMOS MODIFICAR SENCILLAMENTE LA 
+         UBICACION DE CADA AREA...SOLO CON 
+         CAMBIARLA DE LUGAR ACA EN ESTA PLANTILLA*/
+        "footer"100px;
+    
+/*TENEMOS YA HECHO EL DISEÑO PARA MOBILE*/
+
+/*DISEÑO PARA TABLET...EL SIDEBAR DEBE IR AL LADO*/
+}
+
+
+
+/*ESE DISEÑO LO HACEMOS CON MEDIAS QUERYS
+TODO LO QUE VAYA DENTRO DE LA MEDIA, ES AFECTADO*/
+/*
+@media (min-width: 600px) {
+    .grid-container{
+        background-color:aqua; aca cambia el color de fondo al pasar los 600px
+        grid-template-columns: 200px auto;
+        
+        ahora el alto de las filas...
+        grid-template-rows: 100px 50px auto 100px; un valor respectivo a cada fila ex..100px al header..etc
+
+
+        grid-template-areas:
+            "header header"
+            "navbar navbar"
+            "sidebar main"   PONEMOS EL SIDE A LA IZQ DESPUES EL MAIN O COMO QUERAMOS Y COMPLETAMOS LAS OTRAS COLUMNAS
+            "footer footer";
+        AHORA AJUSTAMOS EL ANCHO DE FILAS Y COLUMNAS...CON GRID-TEMPLATE--ROWS -COL
+    }
+}
+
+/*LO ANTERIOR LO PODEMOS HACER DE UNA FORMA MAS LIMPIA ASI...*/
+
+@media (min-width: 600px) {
+    .grid-container{
+        grid-template:
+        "header  header" 100px /* si quisieramos que una columna estuviese vacia le ponemos un PUNTO...EX*/
+        "navbar  navbar" 50px
+        "sidebar main"   auto
+        "footer  footer" 100px / 
+        200px auto;
+    
+    }
+}
+
+/**AHORA POR ULTIMO MODO DESKTOP....CUANDO SEA MAYOR A 900PX
+EL NAVBAR IRA A LA IZQ Y EL SIDEBAR A LA DERECHA DEL MAIN*/
+/*DEBE LLEVAR 3 COLUMNAS*/
+@media (min-width: 900px) {
+    .grid-container{
+        grid-template:
+        "header  header header"   100px /* si quisieramos que una columna estuviese vacia le ponemos un PUNTO...EX*/
+        "navbar  main   sidebar"  auto
+        "footer  footer footer"   100px / 
+        250px    auto             200px;
+    
+    }
+}
